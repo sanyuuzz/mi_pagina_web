@@ -1,0 +1,2193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101010">
+    <meta name="description"
+        content="FORJA GYM: entrenamiento, clases, coaches y membresías para alcanzar tus metas. Conoce nuestros horarios y solicita tu inscripción.">
+    <title>FORJA GYM | Construye tu mejor versión</title>
+    <style>
+        /* ==========================================================
+       FORJA GYM — Sitio web estático.
+       Edita colores en :root, precios en los atributos data-price
+       y el número de WhatsApp en la parte final del archivo.
+       ========================================================== */
+        :root {
+            --bg: #10100f;
+            --bg-2: #191918;
+            --bg-3: #232321;
+            --card: #1d1d1b;
+            --text: #f7f5ee;
+            --muted: #b6b4ac;
+            --line: rgba(255, 255, 255, .13);
+            --accent: #ff7644;
+            --accent-2: #ffad7b;
+            --dark: #0b0b0a;
+            --success: #a9e3a2;
+            --radius: 20px;
+            --shadow: 0 18px 52px rgba(0, 0, 0, .25);
+            --max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: var(--bg);
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible,
+        summary:focus-visible {
+            outline: 3px solid var(--accent-2);
+            outline-offset: 3px;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #101010;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 40px));
+            margin-inline: auto;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .skip-link {
+            position: fixed;
+            z-index: 100;
+            left: 14px;
+            top: -80px;
+            padding: 10px 16px;
+            background: var(--accent);
+            color: #111;
+            border-radius: 10px;
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        .eyebrow {
+            margin: 0 0 16px;
+            color: var(--accent-2);
+            font-weight: 800;
+            letter-spacing: .17em;
+            text-transform: uppercase;
+            font-size: .76rem;
+        }
+
+        .section {
+            padding: 105px 0;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .section-head p:last-child {
+            max-width: 470px;
+            margin-bottom: 3px;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.12;
+        }
+
+        h1 {
+            font-size: clamp(3.8rem, 8.5vw, 8.1rem);
+            letter-spacing: -.075em;
+            font-weight: 950;
+        }
+
+        h2 {
+            font-size: clamp(2.4rem, 4.6vw, 4.3rem);
+            letter-spacing: -.065em;
+            font-weight: 900;
+            margin-bottom: 0;
+        }
+
+        h3 {
+            font-size: 1.35rem;
+            letter-spacing: -.025em;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .accent {
+            color: var(--accent);
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 12px;
+            min-height: 49px;
+            padding: 12px 22px;
+            border: 1px solid transparent;
+            font-weight: 850;
+            line-height: 1.2;
+            transition: transform .18s, background .18s, border-color .18s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #111;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-2);
+        }
+
+        .btn-secondary {
+            color: var(--text);
+            background: rgba(255, 255, 255, .05);
+            border-color: var(--line);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+        }
+
+        .btn-white {
+            color: #101010;
+            background: #fff;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .text-link {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            font-weight: 800;
+            color: var(--accent-2);
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
+
+        /* CABECERA */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(16, 16, 15, .95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-wrap {
+            min-height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+        }
+
+        .logo {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 1.28rem;
+            line-height: 1;
+            font-weight: 1000;
+            letter-spacing: -.06em;
+            white-space: nowrap;
+        }
+
+        .logo-mark {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--accent);
+            border-radius: 10px;
+            transform: skew(-9deg);
+            color: var(--accent);
+            font-weight: 1000;
+            font-size: 1.2rem;
+        }
+
+        .logo strong {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links>a:not(.btn) {
+            font-size: .91rem;
+            font-weight: 750;
+            color: #d7d4ce;
+        }
+
+        .nav-links>a:not(.btn):hover {
+            color: var(--accent);
+        }
+
+        .nav-toggle {
+            display: none;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+        }
+
+        .top-progress {
+            height: 3px;
+            background: var(--accent);
+            width: 0;
+            transition: width .1s linear;
+        }
+
+        /* HERO: composición hecha con CSS, sin fotografías */
+        .hero {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            padding: 105px 0 95px;
+            min-height: 675px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -3;
+            background: radial-gradient(circle at 77% 41%, rgba(255, 118, 68, .18), transparent 35%), linear-gradient(125deg, #171715 18%, #10100f 65%);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -170px;
+            top: -125px;
+            z-index: -2;
+            width: 730px;
+            height: 730px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 118, 68, .14);
+            box-shadow: 0 0 0 90px rgba(255, 118, 68, .025), 0 0 0 180px rgba(255, 118, 68, .025), 0 0 0 270px rgba(255, 118, 68, .025);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.16fr .84fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            margin: 0 0 24px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--accent);
+        }
+
+        .hero-desc {
+            color: #cecac3;
+            font-size: 1.13rem;
+            max-width: 560px;
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hero-note {
+            margin-top: 36px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: .87rem;
+            color: var(--muted);
+        }
+
+        .hero-note .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 0 5px rgba(169, 227, 162, .09);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 440px;
+        }
+
+        .hero-orbit {
+            position: absolute;
+            width: min(100%, 430px);
+            aspect-ratio: 1;
+            border: 1px solid rgba(255, 118, 68, .5);
+            border-radius: 50%;
+        }
+
+        .hero-orbit::before,
+        .hero-orbit::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            inset: 42px;
+            border: 1px dashed rgba(255, 255, 255, .18);
+        }
+
+        .hero-orbit::after {
+            inset: 92px;
+            border: 21px solid rgba(255, 118, 68, .085);
+        }
+
+        .hero-number {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-number strong {
+            display: block;
+            font-size: clamp(6rem, 14vw, 10rem);
+            font-weight: 1000;
+            line-height: 1;
+            letter-spacing: -.1em;
+            text-shadow: 0 18px 45px #0006;
+        }
+
+        .hero-number span {
+            font-size: .84rem;
+            letter-spacing: .24em;
+            font-weight: 900;
+            color: var(--accent-2);
+            text-transform: uppercase;
+        }
+
+        .mini-panel {
+            position: absolute;
+            z-index: 2;
+            padding: 13px 17px;
+            background: rgba(34, 34, 31, .95);
+            border: 1px solid rgba(255, 255, 255, .16);
+            box-shadow: var(--shadow);
+            border-radius: 14px;
+        }
+
+        .mini-panel strong {
+            display: block;
+            font-size: 1.04rem;
+        }
+
+        .mini-panel small {
+            color: var(--muted);
+        }
+
+        .mini-panel.one {
+            top: 45px;
+            left: -10px;
+            transform: rotate(-6deg);
+        }
+
+        .mini-panel.two {
+            right: -12px;
+            bottom: 47px;
+            transform: rotate(5deg);
+        }
+
+        /* BANDA */
+        .strip {
+            background: var(--accent);
+            color: #16120f;
+            overflow: hidden;
+        }
+
+        .strip-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 25px;
+            align-items: center;
+            min-height: 78px;
+            font-size: .92rem;
+            font-weight: 1000;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+
+        .strip-inner span {
+            white-space: nowrap;
+        }
+
+        .strip-inner b {
+            font-size: 1.45rem;
+        }
+
+        /* BENEFICIOS */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .feature {
+            background: var(--card);
+            border: 1px solid var(--line);
+            padding: 27px 23px;
+            border-radius: var(--radius);
+            transition: transform .2s, border-color .2s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 118, 68, .6);
+        }
+
+        .feature-index {
+            display: inline-flex;
+            width: 43px;
+            height: 43px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+            color: var(--accent);
+            background: rgba(255, 118, 68, .09);
+            border-radius: 12px;
+            font-weight: 900;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: .95rem;
+            margin: 0;
+        }
+
+        /* CLASES */
+        .section-alt {
+            background: var(--bg-2);
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .class-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(150deg, #292824, #20201e);
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            padding: 28px;
+            min-height: 264px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .class-card::before {
+            content: attr(data-letter);
+            position: absolute;
+            top: -70px;
+            right: -12px;
+            color: rgba(255, 118, 68, .06);
+            font-size: 17rem;
+            line-height: 1;
+            font-weight: 1000;
+        }
+
+        .class-card .tag {
+            display: inline-block;
+            border: 1px solid rgba(255, 118, 68, .4);
+            border-radius: 30px;
+            padding: 5px 11px;
+            font-size: .75rem;
+            color: var(--accent-2);
+            font-weight: 800;
+        }
+
+        .class-card h3 {
+            position: relative;
+            margin: auto 0 7px;
+            font-size: 1.7rem;
+        }
+
+        .class-card p {
+            position: relative;
+            margin-bottom: 18px;
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        .class-card a {
+            position: relative;
+        }
+
+        /* PLANES */
+        .price-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 34px;
+        }
+
+        .period-switch {
+            display: flex;
+            gap: 4px;
+            padding: 5px;
+            background: var(--bg-3);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+
+        .period-switch button {
+            border: 0;
+            border-radius: 9px;
+            background: transparent;
+            color: var(--muted);
+            font-weight: 800;
+            padding: 9px 18px;
+        }
+
+        .period-switch button.active {
+            background: var(--accent);
+            color: #16110e;
+        }
+
+        .save-badge {
+            font-size: .81rem;
+            color: var(--success);
+            font-weight: 800;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .plan {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: var(--card);
+            border: 1px solid var(--line);
+            padding: 31px 28px;
+            border-radius: var(--radius);
+        }
+
+        .plan.popular {
+            border: 2px solid var(--accent);
+            background: linear-gradient(160deg, #29231f, #1d1d1b 50%);
+        }
+
+        .ribbon {
+            position: absolute;
+            right: 18px;
+            top: -15px;
+            background: var(--accent);
+            color: #111;
+            font-size: .76rem;
+            letter-spacing: .05em;
+            padding: 7px 13px;
+            border-radius: 8px;
+            font-weight: 950;
+            text-transform: uppercase;
+        }
+
+        .plan-label {
+            color: var(--accent-2);
+            font-size: .79rem;
+            font-weight: 850;
+            text-transform: uppercase;
+            letter-spacing: .13em;
+        }
+
+        .plan h3 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+        }
+
+        .plan>p {
+            font-size: .93rem;
+            color: var(--muted);
+            min-height: 50px;
+        }
+
+        .price {
+            display: flex;
+            align-items: baseline;
+            gap: 7px;
+            margin: 16px 0 0;
+        }
+
+        .price .currency {
+            font-size: 1.4rem;
+            font-weight: 850;
+        }
+
+        .price .amount {
+            font-size: 3.2rem;
+            line-height: 1;
+            font-weight: 1000;
+            letter-spacing: -.065em;
+        }
+
+        .price .unit {
+            color: var(--muted);
+            font-size: .87rem;
+        }
+
+        .annual-total {
+            color: var(--muted);
+            font-size: .8rem;
+            min-height: 26px;
+            margin: 8px 0 20px;
+        }
+
+        .plan ul {
+            list-style: none;
+            padding: 22px 0 10px;
+            margin: 0 0 auto;
+            border-top: 1px solid var(--line);
+        }
+
+        .plan li {
+            display: flex;
+            gap: 10px;
+            align-items: start;
+            padding: 8px 0;
+            font-size: .92rem;
+        }
+
+        .plan li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: 1000;
+        }
+
+        .plan .btn {
+            margin-top: 25px;
+        }
+
+        .pricing-caption {
+            text-align: center;
+            margin: 25px auto 0;
+            max-width: 650px;
+            color: var(--muted);
+            font-size: .81rem;
+        }
+
+        /* HORARIOS */
+        .schedule-tools {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin: 30px 0 20px;
+        }
+
+        .filter-btn {
+            background: var(--bg-3);
+            color: var(--muted);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: .85rem;
+            padding: 9px 15px;
+            font-weight: 850;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--accent);
+            color: #111;
+            border-color: var(--accent);
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--card);
+        }
+
+        table {
+            border-collapse: collapse;
+            min-width: 690px;
+            width: 100%;
+        }
+
+        th {
+            text-align: left;
+            background: #282724;
+            color: #efece3;
+            font-size: .79rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        th,
+        td {
+            padding: 19px 20px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        tbody tr[hidden] {
+            display: none;
+        }
+
+        td {
+            font-size: .93rem;
+        }
+
+        .table-pill {
+            padding: 5px 10px;
+            border-radius: 9px;
+            color: var(--accent-2);
+            background: rgba(255, 118, 68, .09);
+            white-space: nowrap;
+            font-size: .79rem;
+            font-weight: 850;
+        }
+
+        .table-action {
+            background: transparent;
+            border: none;
+            color: var(--accent-2);
+            font-weight: 800;
+            padding: 2px;
+        }
+
+        .table-action:hover {
+            text-decoration: underline;
+        }
+
+        #schedule-message {
+            color: var(--muted);
+            font-size: .85rem;
+            margin: 16px 0 0;
+        }
+
+        /* ENTRENADORES */
+        .trainer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .trainer {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--card);
+        }
+
+        .trainer-art {
+            position: relative;
+            height: 175px;
+            background: linear-gradient(130deg, #35251d, #22221f);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .trainer-art::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            border: 30px solid rgba(255, 118, 68, .13);
+            transform: rotate(26deg);
+            border-radius: 25px;
+            right: -50px;
+            top: -75px;
+        }
+
+        .trainer-art span {
+            position: relative;
+            z-index: 1;
+            font-size: 5.1rem;
+            color: var(--accent);
+            font-weight: 1000;
+            letter-spacing: -.09em;
+        }
+
+        .trainer-text {
+            padding: 25px;
+        }
+
+        .trainer-text h3 {
+            margin-bottom: 5px;
+        }
+
+        .trainer-text .role {
+            color: var(--accent-2);
+            font-weight: 800;
+            font-size: .85rem;
+            margin-bottom: 12px;
+        }
+
+        .trainer-text p:last-child {
+            color: var(--muted);
+            margin: 0;
+            font-size: .91rem;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 75px 0;
+            background: var(--accent);
+            color: #17110d;
+        }
+
+        .cta-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .cta-inner h2 {
+            max-width: 720px;
+        }
+
+        .cta-inner .eyebrow {
+            color: #4a2416;
+        }
+
+        .cta-inner p {
+            margin-top: 17px;
+            margin-bottom: 0;
+        }
+
+        .cta-section .btn {
+            flex-shrink: 0;
+        }
+
+        /* FAQ */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: .65fr 1.35fr;
+            gap: 70px;
+            align-items: start;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 11px;
+        }
+
+        details {
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: var(--card);
+            padding: 0 20px;
+        }
+
+        summary {
+            cursor: pointer;
+            padding: 20px 29px 20px 0;
+            font-weight: 850;
+            list-style: none;
+            position: relative;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            position: absolute;
+            right: 2px;
+            top: 13px;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        details[open] summary::after {
+            content: "−";
+        }
+
+        details p {
+            color: var(--muted);
+            margin-bottom: 20px;
+            font-size: .95rem;
+        }
+
+        /* CONTACTO */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 56px;
+            align-items: start;
+        }
+
+        .contact-copy>p {
+            max-width: 415px;
+            margin-top: 25px;
+        }
+
+        .contact-info {
+            margin-top: 36px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .contact-icon {
+            display: grid;
+            place-items: center;
+            flex: 0 0 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 118, 68, .35);
+            border-radius: 10px;
+            color: var(--accent);
+            font-weight: 900;
+        }
+
+        .contact-item strong {
+            display: block;
+        }
+
+        .contact-item span {
+            display: block;
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        .contact-form {
+            padding: 33px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: var(--card);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h3 {
+            font-size: 1.55rem;
+            margin-bottom: 9px;
+        }
+
+        .contact-form>p {
+            font-size: .9rem;
+            color: var(--muted);
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .field {
+            margin-top: 17px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: .87rem;
+            font-weight: 800;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            display: block;
+            width: 100%;
+            border: 1px solid #42413e;
+            border-radius: 10px;
+            padding: 12px 13px;
+            background: #151513;
+            color: #fff;
+            outline: none;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .field textarea {
+            min-height: 96px;
+            resize: vertical;
+        }
+
+        .form-help {
+            color: var(--muted);
+            font-size: .78rem;
+            margin: 11px 0 0;
+        }
+
+        #form-result {
+            display: none;
+            border: 1px solid rgba(169, 227, 162, .5);
+            background: rgba(169, 227, 162, .06);
+            padding: 14px;
+            margin-top: 17px;
+            border-radius: 12px;
+        }
+
+        #form-result.show {
+            display: block;
+        }
+
+        #form-result strong {
+            color: var(--success);
+        }
+
+        #message-preview {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-size: .86rem;
+            margin: 10px 0;
+            color: #e0ded7;
+        }
+
+        #copy-message {
+            background: transparent;
+            color: var(--accent-2);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 7px 12px;
+        }
+
+        /* PIE */
+        .site-footer {
+            padding: 55px 0 26px;
+            border-top: 1px solid var(--line);
+            background: #0a0a09;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 45px;
+        }
+
+        .footer-grid p,
+        .footer-grid a {
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .footer-grid h3 {
+            margin-bottom: 18px;
+            font-size: 1rem;
+        }
+
+        .footer-grid nav {
+            display: grid;
+            gap: 10px;
+        }
+
+        .footer-grid a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            margin-top: 48px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .floating-cta {
+            position: fixed;
+            z-index: 45;
+            bottom: 22px;
+            right: 22px;
+            border: 1px solid rgba(0, 0, 0, .2);
+            box-shadow: 0 12px 30px #0008;
+            background: var(--accent);
+            color: #111;
+            padding: 13px 18px;
+            font-weight: 950;
+            border-radius: 13px;
+        }
+
+        .floating-cta:hover {
+            background: var(--accent-2);
+        }
+
+        .toast {
+            position: fixed;
+            z-index: 120;
+            left: 50%;
+            bottom: 22px;
+            transform: translate(-50%, 130px);
+            padding: 12px 18px;
+            background: #f7f5ee;
+            color: #161616;
+            border-radius: 12px;
+            max-width: min(460px, calc(100% - 30px));
+            box-shadow: var(--shadow);
+            transition: transform .25s;
+            font-weight: 750;
+            text-align: center;
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+        }
+
+        @media (max-width: 1020px) {
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links>a:not(.btn) {
+                font-size: .83rem;
+            }
+
+            .hero {
+                min-height: 600px;
+            }
+
+            .hero-visual {
+                min-height: 350px;
+            }
+
+            .mini-panel.one {
+                left: -7px;
+            }
+
+            .mini-panel.two {
+                right: 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .faq-grid {
+                gap: 28px;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .container {
+                width: min(var(--max), calc(100% - 32px));
+            }
+
+            .section {
+                padding: 75px 0;
+            }
+
+            .section-head {
+                display: block;
+            }
+
+            .section-head p:last-child {
+                margin-top: 15px;
+            }
+
+            .nav-toggle {
+                display: grid;
+                place-items: center;
+            }
+
+            .nav-links {
+                position: absolute;
+                display: none;
+                top: 78px;
+                left: 0;
+                right: 0;
+                padding: 22px 20px 29px;
+                background: #151514;
+                border-bottom: 1px solid var(--line);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                box-shadow: 0 20px 25px #0007;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links>a:not(.btn) {
+                padding: 13px 6px;
+                font-size: 1rem;
+            }
+
+            .nav-links .btn {
+                margin-top: 10px;
+            }
+
+            .hero {
+                padding: 78px 0 55px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                min-height: 300px;
+                margin-top: 10px;
+            }
+
+            .hero-orbit {
+                width: 300px;
+            }
+
+            .hero-number strong {
+                font-size: 7rem;
+            }
+
+            .mini-panel.one {
+                left: 8%;
+                top: 18px;
+            }
+
+            .mini-panel.two {
+                right: 7%;
+                bottom: 14px;
+            }
+
+            .strip-inner {
+                gap: 25px;
+                justify-content: center;
+                flex-wrap: wrap;
+                padding: 16px 0;
+            }
+
+            .classes-grid,
+            .pricing-grid,
+            .trainer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid .plan:last-child {
+                grid-column: 1 / -1;
+            }
+
+            .faq-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .cta-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1.5fr 1fr;
+            }
+
+            .footer-grid>div:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 540px) {
+            h1 {
+                font-size: clamp(3.5rem, 14vw, 5.5rem);
+            }
+
+            .hero-desc {
+                font-size: 1rem;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .strip-inner span {
+                font-size: .76rem;
+            }
+
+            .feature-grid,
+            .classes-grid,
+            .pricing-grid,
+            .trainer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid .plan:last-child {
+                grid-column: auto;
+            }
+
+            .class-card {
+                min-height: 230px;
+            }
+
+            .hero-visual {
+                min-height: 280px;
+            }
+
+            .hero-orbit {
+                width: 255px;
+            }
+
+            .hero-number strong {
+                font-size: 6rem;
+            }
+
+            .mini-panel.one {
+                left: 0;
+            }
+
+            .mini-panel.two {
+                right: 0;
+            }
+
+            .field-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .contact-form {
+                padding: 22px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .footer-grid>div:last-child {
+                grid-column: auto;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+
+            .floating-cta {
+                right: 13px;
+                bottom: 13px;
+                padding: 10px 14px;
+                font-size: .85rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="logo" href="#inicio" aria-label="FORJA GYM, ir al inicio"><span class="logo-mark"
+                    aria-hidden="true">F</span> FORJA <strong>GYM</strong></a>
+            <button id="nav-toggle" class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false"
+                aria-label="Abrir menú">☰</button>
+            <nav id="nav-links" class="nav-links" aria-label="Navegación principal">
+                <a href="#beneficios">Beneficios</a>
+                <a href="#clases">Clases</a>
+                <a href="#planes">Membresías</a>
+                <a href="#horarios">Horarios</a>
+                <a href="#entrenadores">Entrenadores</a>
+                <a href="#contacto" class="btn btn-primary">Inscribirme ↗</a>
+            </nav>
+        </div>
+        <div id="top-progress" class="top-progress" aria-hidden="true"></div>
+    </header>
+
+    <main id="contenido">
+        <section id="inicio" class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <p class="eyebrow">Tu nueva etapa empieza aquí</p>
+                    <h1>ACTIVA TU <span>POTENCIAL.</span></h1>
+                    <p class="hero-desc">Entrena con propósito. Encuentra tu ritmo, descubre clases que te motivan y
+                        elige una membresía que se adapte a tus objetivos.</p>
+                    <div class="hero-actions">
+                        <a href="#planes" class="btn btn-primary">Explorar membresías <span
+                                aria-hidden="true">↗</span></a>
+                        <a href="#clases" class="btn btn-secondary">Descubrir las clases</a>
+                    </div>
+                    <div class="hero-note"><span class="dot" aria-hidden="true"></span> Entrenamiento para todos los
+                        niveles</div>
+                </div>
+                <div class="hero-visual" aria-label="Diseño decorativo con el lema de FORJA GYM">
+                    <div class="hero-orbit" aria-hidden="true"></div>
+                    <div class="hero-number" aria-hidden="true"><strong>F.</strong><span>Fuerza que transforma</span>
+                    </div>
+                    <div class="mini-panel one"><strong>01 / Empieza</strong><small>A tu ritmo, con apoyo</small></div>
+                    <div class="mini-panel two"><strong>02 / Avanza</strong><small>Constancia y comunidad</small></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="strip" aria-label="Servicios destacados">
+            <div class="container strip-inner"><span>Entrenamiento de fuerza</span><b
+                    aria-hidden="true">✳</b><span>Clases grupales</span><b aria-hidden="true">✳</b><span>Asesoría
+                    personalizada</span></div>
+        </div>
+
+        <section id="beneficios" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Por qué elegir FORJA</p>
+                        <h2>TODO LO QUE NECESITAS<br>EN UN SOLO LUGAR.</h2>
+                    </div>
+                    <p class="muted">Un espacio diseñado para entrenar con comodidad, constancia y acompañamiento, sin
+                        importar tu experiencia.</p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature"><span class="feature-index">01</span>
+                        <h3>Área de musculación</h3>
+                        <p>Espacios para trabajar fuerza y técnica con distintas opciones de entrenamiento.</p>
+                    </article>
+                    <article class="feature"><span class="feature-index">02</span>
+                        <h3>Clases dirigidas</h3>
+                        <p>Entrenamientos grupales para darle variedad y motivación a tu semana.</p>
+                    </article>
+                    <article class="feature"><span class="feature-index">03</span>
+                        <h3>Entrenadores</h3>
+                        <p>Orientación profesional para aprender movimientos y avanzar con confianza.</p>
+                    </article>
+                    <article class="feature"><span class="feature-index">04</span>
+                        <h3>Planes flexibles</h3>
+                        <p>Opciones de membresía para diferentes horarios y estilos de vida.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="clases" class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Muévete a tu manera</p>
+                        <h2>ENCUENTRA TU<br>CLASE FAVORITA.</h2>
+                    </div>
+                    <p class="muted">Combina actividades y descubre lo que más disfrutas. Consulta los horarios antes de
+                        reservar.</p>
+                </div>
+                <div class="classes-grid">
+                    <article class="class-card" data-letter="F"><span class="tag">FUERZA</span>
+                        <h3>Musculación</h3>
+                        <p>Trabajo de fuerza y técnica con progresiones para diferentes niveles.</p><a class="text-link"
+                            href="#horarios">Ver horarios ↗</a>
+                    </article>
+                    <article class="class-card" data-letter="H"><span class="tag">CARDIO</span>
+                        <h3>HIIT</h3>
+                        <p>Sesiones dinámicas con intervalos y opciones de intensidad.</p><a class="text-link"
+                            href="#horarios">Ver horarios ↗</a>
+                    </article>
+                    <article class="class-card" data-letter="X"><span class="tag">DINÁMICA</span>
+                        <h3>Funcional</h3>
+                        <p>Movimientos prácticos para mejorar coordinación y condición física.</p><a class="text-link"
+                            href="#horarios">Ver horarios ↗</a>
+                    </article>
+                    <article class="class-card" data-letter="B"><span class="tag">RITMO</span>
+                        <h3>Baile fitness</h3>
+                        <p>Coreografías y movimiento en un ambiente de buena energía.</p><a class="text-link"
+                            href="#horarios">Ver horarios ↗</a>
+                    </article>
+                    <article class="class-card" data-letter="M"><span class="tag">BIENESTAR</span>
+                        <h3>Movilidad</h3>
+                        <p>Sesiones enfocadas en flexibilidad, control corporal y recuperación.</p><a class="text-link"
+                            href="#horarios">Ver horarios ↗</a>
+                    </article>
+                    <article class="class-card" data-letter="C"><span class="tag">CONTROL</span>
+                        <h3>Core</h3>
+                        <p>Entrenamientos para desarrollar estabilidad y control del tronco.</p><a class="text-link"
+                            href="#horarios">Ver horarios ↗</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="planes" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Membresías</p>
+                        <h2>ELIGE TU PLAN.<br>EMPIEZA HOY.</h2>
+                    </div>
+                    <p class="muted">Precios de demostración en soles peruanos. Personalízalos según los servicios y
+                        tarifas reales de tu gimnasio.</p>
+                </div>
+                <div class="price-controls">
+                    <div class="period-switch" role="group" aria-label="Periodo de pago">
+                        <button id="period-month" type="button" class="active" aria-pressed="true">Mensual</button>
+                        <button id="period-year" type="button" aria-pressed="false">Anual</button>
+                    </div>
+                    <span class="save-badge">Ahorra 15% con el plan anual</span>
+                </div>
+                <div class="pricing-grid">
+                    <article class="plan" data-plan="Esencial" data-price="80">
+                        <span class="plan-label">Para comenzar</span>
+                        <h3>Esencial</h3>
+                        <p>Empieza a crear tu rutina con acceso a lo indispensable.</p>
+                        <div class="price"><span class="currency">S/</span><span class="amount">80</span><span
+                                class="unit">/ mes</span></div>
+                        <div class="annual-total">Pago mensual</div>
+                        <ul>
+                            <li>Acceso a zona de musculación</li>
+                            <li>Acceso a zona de cardio</li>
+                            <li>Horario regular</li>
+                            <li>Orientación inicial</li>
+                        </ul>
+                        <button class="btn btn-secondary btn-full choose-plan" type="button" data-plan="Esencial">Elegir
+                            Esencial ↗</button>
+                    </article>
+                    <article class="plan popular" data-plan="Power" data-price="120">
+                        <span class="ribbon">Más elegido</span><span class="plan-label">Para mantener el ritmo</span>
+                        <h3>Power</h3>
+                        <p>Más alternativas para combinar tus entrenamientos favoritos.</p>
+                        <div class="price"><span class="currency">S/</span><span class="amount">120</span><span
+                                class="unit">/ mes</span></div>
+                        <div class="annual-total">Pago mensual</div>
+                        <ul>
+                            <li>Todo lo del plan Esencial</li>
+                            <li>Clases grupales incluidas</li>
+                            <li>Acceso a horarios ampliados</li>
+                            <li>Seguimiento básico de progreso</li>
+                        </ul>
+                        <button class="btn btn-primary btn-full choose-plan" type="button" data-plan="Power">Elegir
+                            Power ↗</button>
+                    </article>
+                    <article class="plan" data-plan="Elite" data-price="160">
+                        <span class="plan-label">Para ir más allá</span>
+                        <h3>Elite</h3>
+                        <p>Más acompañamiento y beneficios en un solo plan.</p>
+                        <div class="price"><span class="currency">S/</span><span class="amount">160</span><span
+                                class="unit">/ mes</span></div>
+                        <div class="annual-total">Pago mensual</div>
+                        <ul>
+                            <li>Todo lo del plan Power</li>
+                            <li>Sesión mensual de asesoría</li>
+                            <li>Prioridad en reservas de clases</li>
+                            <li>Evaluación inicial de objetivos</li>
+                        </ul>
+                        <button class="btn btn-secondary btn-full choose-plan" type="button" data-plan="Elite">Elegir
+                            Elite ↗</button>
+                    </article>
+                </div>
+                <p class="pricing-caption">* Planes, beneficios y tarifas son ilustrativos. Ajusta esta información
+                    antes de publicar la web para clientes. El formulario solicita información, pero no cobra en línea.
+                </p>
+            </div>
+        </section>
+
+        <section id="horarios" class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Organiza tu semana</p>
+                        <h2>HORARIOS DE<br>CLASES.</h2>
+                    </div>
+                    <p class="muted">Filtra por día y elige una clase. Los horarios son de ejemplo y se pueden editar
+                        directamente en el HTML.</p>
+                </div>
+                <div class="schedule-tools" role="group" aria-label="Filtrar clases por día">
+                    <button type="button" class="filter-btn active" data-day="Todos" aria-pressed="true">Todos</button>
+                    <button type="button" class="filter-btn" data-day="Lunes" aria-pressed="false">Lunes</button>
+                    <button type="button" class="filter-btn" data-day="Martes" aria-pressed="false">Martes</button>
+                    <button type="button" class="filter-btn" data-day="Miércoles"
+                        aria-pressed="false">Miércoles</button>
+                    <button type="button" class="filter-btn" data-day="Jueves" aria-pressed="false">Jueves</button>
+                    <button type="button" class="filter-btn" data-day="Viernes" aria-pressed="false">Viernes</button>
+                    <button type="button" class="filter-btn" data-day="Sábado" aria-pressed="false">Sábado</button>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Día</th>
+                                <th>Hora</th>
+                                <th>Clase</th>
+                                <th>Entrenador/a</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-body">
+                            <tr data-day="Lunes">
+                                <td><strong>Lunes</strong></td>
+                                <td>07:00 – 08:00</td>
+                                <td><span class="table-pill">Funcional</span></td>
+                                <td>Alex Rojas</td>
+                                <td><button class="table-action reserve-class" data-class="Funcional"
+                                        data-time="Lunes 07:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Lunes">
+                                <td><strong>Lunes</strong></td>
+                                <td>18:00 – 19:00</td>
+                                <td><span class="table-pill">HIIT</span></td>
+                                <td>Sam Torres</td>
+                                <td><button class="table-action reserve-class" data-class="HIIT" data-time="Lunes 18:00"
+                                        type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Martes">
+                                <td><strong>Martes</strong></td>
+                                <td>08:00 – 09:00</td>
+                                <td><span class="table-pill">Movilidad</span></td>
+                                <td>Dani León</td>
+                                <td><button class="table-action reserve-class" data-class="Movilidad"
+                                        data-time="Martes 08:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Martes">
+                                <td><strong>Martes</strong></td>
+                                <td>19:00 – 20:00</td>
+                                <td><span class="table-pill">Baile fitness</span></td>
+                                <td>Dani León</td>
+                                <td><button class="table-action reserve-class" data-class="Baile fitness"
+                                        data-time="Martes 19:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Miércoles">
+                                <td><strong>Miércoles</strong></td>
+                                <td>07:00 – 08:00</td>
+                                <td><span class="table-pill">Core</span></td>
+                                <td>Alex Rojas</td>
+                                <td><button class="table-action reserve-class" data-class="Core"
+                                        data-time="Miércoles 07:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Miércoles">
+                                <td><strong>Miércoles</strong></td>
+                                <td>18:30 – 19:30</td>
+                                <td><span class="table-pill">Funcional</span></td>
+                                <td>Sam Torres</td>
+                                <td><button class="table-action reserve-class" data-class="Funcional"
+                                        data-time="Miércoles 18:30" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Jueves">
+                                <td><strong>Jueves</strong></td>
+                                <td>08:00 – 09:00</td>
+                                <td><span class="table-pill">Movilidad</span></td>
+                                <td>Dani León</td>
+                                <td><button class="table-action reserve-class" data-class="Movilidad"
+                                        data-time="Jueves 08:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Jueves">
+                                <td><strong>Jueves</strong></td>
+                                <td>19:00 – 20:00</td>
+                                <td><span class="table-pill">Baile fitness</span></td>
+                                <td>Dani León</td>
+                                <td><button class="table-action reserve-class" data-class="Baile fitness"
+                                        data-time="Jueves 19:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Viernes">
+                                <td><strong>Viernes</strong></td>
+                                <td>07:00 – 08:00</td>
+                                <td><span class="table-pill">HIIT</span></td>
+                                <td>Sam Torres</td>
+                                <td><button class="table-action reserve-class" data-class="HIIT"
+                                        data-time="Viernes 07:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Viernes">
+                                <td><strong>Viernes</strong></td>
+                                <td>18:00 – 19:00</td>
+                                <td><span class="table-pill">Core</span></td>
+                                <td>Alex Rojas</td>
+                                <td><button class="table-action reserve-class" data-class="Core"
+                                        data-time="Viernes 18:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Sábado">
+                                <td><strong>Sábado</strong></td>
+                                <td>09:00 – 10:00</td>
+                                <td><span class="table-pill">Funcional</span></td>
+                                <td>Alex Rojas</td>
+                                <td><button class="table-action reserve-class" data-class="Funcional"
+                                        data-time="Sábado 09:00" type="button">Consultar ↗</button></td>
+                            </tr>
+                            <tr data-day="Sábado">
+                                <td><strong>Sábado</strong></td>
+                                <td>10:30 – 11:30</td>
+                                <td><span class="table-pill">Baile fitness</span></td>
+                                <td>Dani León</td>
+                                <td><button class="table-action reserve-class" data-class="Baile fitness"
+                                        data-time="Sábado 10:30" type="button">Consultar ↗</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p id="schedule-message" role="status">Mostrando todas las clases de ejemplo.</p>
+            </div>
+        </section>
+
+        <section id="entrenadores" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Conoce al equipo</p>
+                        <h2>ENTRENA CON<br>ACOMPAÑAMIENTO.</h2>
+                    </div>
+                    <p class="muted">Perfiles de demostración que puedes reemplazar por la información real de tus
+                        entrenadores.</p>
+                </div>
+                <div class="trainer-grid">
+                    <article class="trainer">
+                        <div class="trainer-art" aria-hidden="true"><span>AR.</span></div>
+                        <div class="trainer-text">
+                            <h3>Alex Rojas</h3>
+                            <p class="role">Fuerza y entrenamiento funcional</p>
+                            <p>Clases enfocadas en movimiento, control y buena técnica.</p>
+                        </div>
+                    </article>
+                    <article class="trainer">
+                        <div class="trainer-art" aria-hidden="true"><span>ST.</span></div>
+                        <div class="trainer-text">
+                            <h3>Sam Torres</h3>
+                            <p class="role">HIIT y acondicionamiento</p>
+                            <p>Sesiones con alternativas para distintos niveles de experiencia.</p>
+                        </div>
+                    </article>
+                    <article class="trainer">
+                        <div class="trainer-art" aria-hidden="true"><span>DL.</span></div>
+                        <div class="trainer-text">
+                            <h3>Dani León</h3>
+                            <p class="role">Baile fitness y movilidad</p>
+                            <p>Entrenamientos que combinan energía, coordinación y disfrute.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section" aria-label="Comienza a entrenar">
+            <div class="container cta-inner">
+                <div>
+                    <p class="eyebrow">Es tu momento</p>
+                    <h2>NO NECESITAS SER EXPERTO PARA EMPEZAR.</h2>
+                    <p>Elige una opción, consulta tus dudas y da el primer paso.</p>
+                </div><a class="btn btn-white" href="#contacto">Quiero información ↗</a>
+            </div>
+        </section>
+
+        <section id="preguntas" class="section">
+            <div class="container faq-grid">
+                <div>
+                    <p class="eyebrow">Preguntas frecuentes</p>
+                    <h2>RESOLVEMOS<br>TUS DUDAS.</h2>
+                    <p class="muted" style="margin-top:22px">¿Necesitas orientación adicional? Escríbenos desde el
+                        formulario y cuéntanos qué buscas.</p><a href="#contacto" class="text-link">Hablar con el equipo
+                        ↗</a>
+                </div>
+                <div class="faq-list">
+                    <details>
+                        <summary>¿Necesito experiencia previa para inscribirme?</summary>
+                        <p>No. Puedes comenzar desde tu nivel actual. Nuestro equipo puede orientarte sobre las opciones
+                            disponibles y el uso adecuado de los espacios.</p>
+                    </details>
+                    <details>
+                        <summary>¿Qué incluye cada membresía?</summary>
+                        <p>Depende del plan elegido. En la sección de membresías encontrarás las características de
+                            Esencial, Power y Elite. Recuerda adaptar los beneficios a los servicios reales antes de
+                            publicar.</p>
+                    </details>
+                    <details>
+                        <summary>¿Cómo puedo consultar la disponibilidad de clases?</summary>
+                        <p>En la sección de horarios, elige un día y haz clic en «Consultar». Se preparará una solicitud
+                            que podrás enviar a través del formulario de contacto.</p>
+                    </details>
+                    <details>
+                        <summary>¿Puedo pedir información antes de pagar?</summary>
+                        <p>Sí. Esta página permite solicitar información y consultar una inscripción por WhatsApp. No se
+                            realizan cobros automáticamente desde este sitio.</p>
+                    </details>
+                    <details>
+                        <summary>¿Dónde están ubicados y en qué horario atienden?</summary>
+                        <p>La dirección y el horario general deben ser configurados por el administrador del gimnasio.
+                            Puedes escribirnos en la sección de contacto para solicitar estos datos.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="section section-alt">
+            <div class="container contact-grid">
+                <div class="contact-copy">
+                    <p class="eyebrow">Inscríbete o consulta</p>
+                    <h2>HABLEMOS DE<br>TU PRÓXIMO PASO.</h2>
+                    <p class="muted">Selecciona tu plan o una clase y completa tus datos. Prepararemos un mensaje para
+                        enviarlo al gimnasio por WhatsApp.</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">⌖</div>
+                            <div><strong>Ubicación</strong><span>Agrega aquí la dirección de tu gimnasio, ciudad y
+                                    distrito.</span></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">◷</div>
+                            <div><strong>Horario de atención</strong><span>Lunes a sábado · Configurar horas reales de
+                                    apertura y cierre.</span></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon" aria-hidden="true">✉</div>
+                            <div><strong>Atención personalizada</strong><span>Solicitudes por WhatsApp con mensaje listo
+                                    para enviar.</span></div>
+                        </div>
+                    </div>
+                </div>
+                <form id="lead-form" class="contact-form" novalidate>
+                    <h3>Solicita información</h3>
+                    <p>Completa los datos y nos cuentas qué necesitas.</p>
+                    <div class="field-row">
+                        <div class="field"><label for="client-name">Nombre completo *</label><input id="client-name"
+                                name="name" type="text" autocomplete="name" minlength="3" maxlength="80"
+                                placeholder="Ej.: María Pérez" required></div>
+                        <div class="field"><label for="client-phone">Celular *</label><input id="client-phone"
+                                name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ej.: 987654321"
+                                required></div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field"><label for="client-plan">Plan de interés *</label><select id="client-plan"
+                                name="plan" required>
+                                <option value="" disabled selected>Elige una opción</option>
+                                <option value="Esencial">Esencial</option>
+                                <option value="Power">Power</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Solo consultar una clase">Solo consultar una clase</option>
+                                <option value="Quiero orientación">Quiero orientación</option>
+                            </select></div>
+                        <div class="field"><label for="client-time">Mejor turno</label><select id="client-time"
+                                name="turn">
+                                <option value="Indistinto">Indistinto</option>
+                                <option value="Mañana">Mañana</option>
+                                <option value="Tarde">Tarde</option>
+                                <option value="Noche">Noche</option>
+                            </select></div>
+                    </div>
+                    <div class="field"><label for="client-message">Mensaje adicional</label><textarea
+                            id="client-message" name="message" maxlength="400"
+                            placeholder="Tengo una consulta sobre..."></textarea></div>
+                    <div class="field"><label><input id="consent" type="checkbox" required
+                                style="width:auto;display:inline;margin-right:7px;accent-color:var(--accent)"> Acepto
+                            enviar voluntariamente estos datos para que el gimnasio responda mi consulta. *</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" style="margin-top:20px">Preparar solicitud
+                        por WhatsApp ↗</button>
+                    <p class="form-help">* Campos obligatorios. No se realizan pagos ni se guardan datos en un servidor.
+                    </p>
+                    <div id="form-result" role="status" aria-live="polite"><strong>Tu mensaje está preparado</strong>
+                        <p id="message-preview"></p><button type="button" id="copy-message">Copiar mensaje</button>
+                        <p class="form-help">Para abrir WhatsApp automáticamente, configura el número del gimnasio en el
+                            JavaScript.</p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div><a class="logo" href="#inicio"><span class="logo-mark" aria-hidden="true">F</span> FORJA
+                        <strong>GYM</strong></a>
+                    <p style="max-width:320px;margin-top:20px">Un espacio para entrenar a tu ritmo, aprender, mantenerte
+                        activo y disfrutar el proceso.</p>
+                </div>
+                <div>
+                    <h3>Explora</h3>
+                    <nav aria-label="Enlaces de servicios"><a href="#beneficios">Nuestros beneficios</a><a
+                            href="#clases">Clases</a><a href="#planes">Membresías</a><a href="#horarios">Horarios</a>
+                    </nav>
+                </div>
+                <div>
+                    <h3>Te ayudamos</h3>
+                    <nav aria-label="Enlaces de ayuda"><a href="#entrenadores">Entrenadores</a><a
+                            href="#preguntas">Preguntas frecuentes</a><a href="#contacto">Contacto</a><a
+                            href="#inicio">Volver al inicio ↑</a></nav>
+                </div>
+            </div>
+            <div class="footer-bottom"><span>© <span id="current-year">2026</span> FORJA GYM. Sitio web de
+                    demostración.</span><span>Diseñado solo con HTML, CSS y JavaScript.</span></div>
+        </div>
+    </footer>
+    <a class="floating-cta" href="#contacto" aria-label="Ir al formulario de inscripción">Inscribirme ↗</a>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        "use strict";
+
+        /* ==========================================================
+           CONFIGURACIÓN IMPORTANTE
+           Cambia el valor de WHATSAPP_NUMBER por el del gimnasio.
+           Ejemplo Perú: "51987654321" (51 + 9 dígitos, sin + ni espacios).
+           Si queda vacío, el sitio ofrecerá copiar el mensaje en vez
+           de intentar enviarlo a un número inventado.
+           ========================================================== */
+        const WHATSAPP_NUMBER = "";
+        const ANNUAL_DISCOUNT = 0.15;
+
+        const $ = (selector) => document.querySelector(selector);
+        const $$ = (selector) => [...document.querySelectorAll(selector)];
+        const navToggle = $("#nav-toggle");
+        const navLinks = $("#nav-links");
+        const toast = $("#toast");
+        const planField = $("#client-plan");
+        const messageField = $("#client-message");
+        const form = $("#lead-form");
+        const result = $("#form-result");
+        let period = "monthly";
+        let toastTimer;
+        let lastMessage = "";
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add("show");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove("show"), 3600);
+        }
+
+        function closeMenu() {
+            navLinks.classList.remove("open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.setAttribute("aria-label", "Abrir menú");
+            navToggle.textContent = "☰";
+            document.body.classList.remove("menu-open");
+        }
+        navToggle.addEventListener("click", () => {
+            const open = !navLinks.classList.contains("open");
+            if (open) {
+                navLinks.classList.add("open");
+                navToggle.setAttribute("aria-expanded", "true");
+                navToggle.setAttribute("aria-label", "Cerrar menú");
+                navToggle.textContent = "×";
+                document.body.classList.add("menu-open");
+            } else closeMenu();
+        });
+        $$("#nav-links a").forEach((link) => link.addEventListener("click", closeMenu));
+        document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeMenu(); });
+        window.addEventListener("resize", () => { if (window.innerWidth > 780) closeMenu(); });
+
+        function updateScrollProgress() {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            $("#top-progress").style.width = (maxScroll > 0 ? window.scrollY / maxScroll * 100 : 0) + "%";
+        }
+        window.addEventListener("scroll", updateScrollProgress, { passive: true });
+        window.addEventListener("resize", updateScrollProgress);
+        updateScrollProgress();
+        $("#current-year").textContent = new Date().getFullYear();
+
+        // Alterna entre pago mensual y anual; todos los importes se calculan.
+        function formatPrice(value) {
+            return new Intl.NumberFormat("es-PE", { maximumFractionDigits: 0 }).format(value);
+        }
+        function updatePrices() {
+            $$(".plan").forEach((card) => {
+                const base = Number(card.dataset.price);
+                const annualTotal = Math.round(base * 12 * (1 - ANNUAL_DISCOUNT));
+                const equivalent = annualTotal / 12;
+                card.querySelector(".amount").textContent = formatPrice(period === "monthly" ? base : equivalent);
+                card.querySelector(".unit").textContent = "/ mes";
+                card.querySelector(".annual-total").textContent = period === "monthly" ? "Pago mensual" : "Facturación anual: S/ " + formatPrice(annualTotal) + " en total";
+            });
+            const annual = period === "yearly";
+            $("#period-month").classList.toggle("active", !annual);
+            $("#period-year").classList.toggle("active", annual);
+            $("#period-month").setAttribute("aria-pressed", String(!annual));
+            $("#period-year").setAttribute("aria-pressed", String(annual));
+        }
+        $("#period-month").addEventListener("click", () => { period = "monthly"; updatePrices(); });
+        $("#period-year").addEventListener("click", () => { period = "yearly"; updatePrices(); });
+        updatePrices();
+
+        // Botones que seleccionan una membresía.
+        $$(".choose-plan").forEach((button) => button.addEventListener("click", () => {
+            planField.value = button.dataset.plan;
+            $("#contacto").scrollIntoView({ behavior: "smooth" });
+            showToast("Seleccionaste el plan " + button.dataset.plan + ". Completa el formulario.");
+            setTimeout(() => $("#client-name").focus({ preventScroll: true }), 450);
+        }));
+
+        // Filtro interactivo del horario por día.
+        $$(".filter-btn").forEach((button) => button.addEventListener("click", () => {
+            const day = button.dataset.day;
+            let visible = 0;
+            $$("#schedule-body tr").forEach((row) => {
+                row.hidden = day !== "Todos" && row.dataset.day !== day;
+                if (!row.hidden) visible++;
+            });
+            $$(".filter-btn").forEach((item) => {
+                const active = item === button;
+                item.classList.toggle("active", active);
+                item.setAttribute("aria-pressed", String(active));
+            });
+            $("#schedule-message").textContent = day === "Todos" ? "Mostrando " + visible + " clases de ejemplo." : "Mostrando " + visible + " clases del día " + day.toLowerCase() + ".";
+        }));
+
+        // Consulta de clase desde los horarios.
+        $$(".reserve-class").forEach((button) => button.addEventListener("click", () => {
+            planField.value = "Solo consultar una clase";
+            messageField.value = "Hola, quisiera consultar disponibilidad para " + button.dataset.class + " el " + button.dataset.time + ".";
+            $("#contacto").scrollIntoView({ behavior: "smooth" });
+            showToast("Clase agregada a tu consulta. Completa tus datos.");
+        }));
+
+        // No usa backend. El cliente elige si envía la solicitud por WhatsApp.
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const name = $("#client-name").value.trim();
+            const rawPhone = $("#client-phone").value.trim();
+            const digits = rawPhone.replace(/\D/g, "");
+            const plan = planField.value;
+            const shift = $("#client-time").value;
+            const notes = messageField.value.trim();
+            const consent = $("#consent").checked;
+            result.classList.remove("show");
+            if (name.length < 3) { showToast("Ingresa tu nombre completo."); $("#client-name").focus(); return; }
+            if (!/^(?:51)?9\d{8}$/.test(digits)) { showToast("Ingresa un celular peruano válido de 9 dígitos."); $("#client-phone").focus(); return; }
+            if (!plan) { showToast("Selecciona un plan o motivo de consulta."); planField.focus(); return; }
+            if (!consent) { showToast("Confirma que deseas enviar estos datos."); $("#consent").focus(); return; }
+            const selectedPlanCard = $$(".plan").find(card => card.dataset.plan === plan);
+            let priceLine = "";
+            if (selectedPlanCard) {
+                const base = Number(selectedPlanCard.dataset.price);
+                const annualTotal = Math.round(base * 12 * (1 - ANNUAL_DISCOUNT));
+                priceLine = period === "monthly" ? "Precio referencial: S/ " + base + "/mes" : "Precio referencial anual: S/ " + annualTotal + " en total";
+            }
+            lastMessage = [
+                "¡Hola, FORJA GYM! Quiero información sobre sus servicios.",
+                "Nombre: " + name,
+                "Celular: " + rawPhone,
+                "Interés: " + plan,
+                "Modalidad: " + (period === "yearly" ? "Anual" : "Mensual"),
+                priceLine,
+                "Turno preferido: " + shift,
+                notes ? "Consulta: " + notes : ""
+            ].filter(Boolean).join("\n");
+
+            const validDestination = /^\d{10,15}$/.test(WHATSAPP_NUMBER);
+            if (validDestination) {
+                window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lastMessage), "_blank", "noopener,noreferrer");
+                showToast("WhatsApp se abrió con tu mensaje. Revisa y presiona Enviar.");
+            } else {
+                $("#message-preview").textContent = lastMessage;
+                result.classList.add("show");
+                result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                showToast("Solicitud preparada. Configura WhatsApp para activarlo.");
+            }
+        });
+        $("#copy-message").addEventListener("click", async () => {
+            if (!lastMessage) return;
+            try {
+                await navigator.clipboard.writeText(lastMessage);
+                showToast("Mensaje copiado. Puedes pegarlo en WhatsApp.");
+            } catch {
+                showToast("Selecciona el mensaje de arriba y cópialo manualmente.");
+            }
+        });
+    </script>
+</body>
+
+</html>
